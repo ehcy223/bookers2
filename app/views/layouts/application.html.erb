@@ -2,9 +2,10 @@
 <html>
   <head>
     <title>Bookers2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  
 
     <script src="https://kit.fontawesome.com/847d84db90.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -12,10 +13,14 @@
   </head>
 
   <body>
-  <%= render 'layouts/header' %>
-  <main>
+    <header>
+    <%= render 'layouts/header' %>
+    </header>
+    <main>
     <%= yield %>
-  </main>
-  <%= render 'layouts/footer' %> 
+    </main>
+    <footer>
+    <%= render 'layouts/footer' %>
+    </footer> 
   </body>
 </html>

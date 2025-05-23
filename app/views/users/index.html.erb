@@ -1,2 +1,60 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class='container px-5 px-sm-0'>
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= image_tag current_user.get_profile_image(100, 100) %>
+      <table class='table'>
+        <tr>
+          <th>name</th>
+          <td><%= current_user.name %></td>
+        </tr>
+        <tr>
+          <th>introduction</th>
+          <td><%= current_user.introduction %></td>
+        </tr>
+      </table>
+      
+      <a class="icon-link" d-inline-flex align-items-center mb-3" href="#user-info">
+      <svg class="bi me-1" width="16" height="16"><use xlink:href="#box-seam"/></svg>
+      <i class="bi bi-person-fill-gear me-1"></i>
+      </a>
+
+      <h2 class="mt-4">New book</h2>
+      <%= form_with(model: @book, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :body, "Opinion" %>
+          <%= f.text_area :body, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Create Book", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Users</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= image_tag user.get_profile_image(100, 100) %></td>
+              <td><%= user.name %></td>
+              <td><%= link_to 'Show', user_path(user) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

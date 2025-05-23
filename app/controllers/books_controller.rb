@@ -1,8 +1,12 @@
 class BooksController < ApplicationController
   def index
+    @books = Book.includes(:user).all
   end
 
   def show
+    @book = Book.find(params[:id])
+    @user = @book.user 
+    @books = @user.books 
   end
 
   def create

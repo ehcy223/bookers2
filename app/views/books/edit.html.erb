@@ -1,2 +1,27 @@
-<h1>Books#edit</h1>
-<p>Find me in app/views/books/edit.html.erb</p>
+<h1 style="text-align: center;">Editing Book</h1>
+
+<div style="display: flex; justify-content: center;">
+  <div style="width: 500px; margin: 0 auto;">
+     <%= form_with(model: @book, local: true, html: { multipart: true }) do |f| %>
+
+       <div class="mb-3" style="text-align: left;">
+        <%= f.label :title, "Title" %><br>
+        <%= f.text_field :tilte, class: "form-control" %>
+      </div>
+
+      <div  class="mb-3" style="text-align: left;">
+        <%= f.label :body, "Opinion" %><br>
+        <%= f.text_area :body, rows: 5, class: "form-control" %>
+      </div>
+
+      <div class="mb-3" style="text-align: left;">
+        <%= f.submit "Update Book ", class: "btn btn-success" %>
+      </div>
+
+      <div class="mb-3" style="text-align: left;">
+        <%= link_to 'Show', book_path(@book) %>|
+        <%= link_to 'Back', books_path %>
+      </div>
+    <% end %>
+  </div>
+</div>

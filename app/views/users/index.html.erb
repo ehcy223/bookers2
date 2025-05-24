@@ -14,9 +14,14 @@
         </tr>
       </table>
       
-      <a class="icon-link" d-inline-flex align-items-center mb-3" href="#user-info">
-      <svg class="bi me-1" width="16" height="16"><use xlink:href="#box-seam"/></svg>
-      <i class="bi bi-person-fill-gear me-1"></i>
+      <a href="<%= edit_user_path(current_user) %>"
+        style="display: flex; justify-content: center; align-items: center; 
+          width: 280px; height: 30px; border: 1px solid #ccc;; 
+          border-radius: 8px; text-decoration: none;">
+        <svg class="bi" width="20" height="20" style="fill: gray;">
+          <use xlink:href="#box-seam" />
+        </svg>
+          <i class="bi bi-person-fill-gear" style="font-size: 20px; color: gray; margin-auto"></i> 
       </a>
 
       <h2 class="mt-4">New book</h2>

@@ -28,8 +28,11 @@
         <div class="actions">
           <%= f.submit "Sign up", class: "btn btn-sm btn-success" %>
         </div>
-      <% end %>
 
+        <div>
+          <%= link_to 'Log in', new_user_session_path, class: "text-primary" %>
+        </div>
+      <% end %>
       </div>
     </div>
   </div>

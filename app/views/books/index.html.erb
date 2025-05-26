@@ -1,26 +1,42 @@
 <%= render "shared/sidebar" %>
 
 <div class="col-md-8 offset-md-1">
+  <% if @book && @book.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h4>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+       </ul>
+    </div>
+  <% end %>
+  
 	<h2>Books</h2>
-	  
-    <table class="table">
-					<thead>
-						<tr>
-						  <th></th>
-							<th>Title</th>
-							<th>Opinion</th>
-						</tr>
-					</thead>
-				  <tbody>
-					  <% @books.each do |book| %>
-						  <tr>
-							  <td><%= image_tag book.user.get_profile_image(50, 50) %>
-							  <td><%= link_to book.title, book_path(book) %></td>
-							  <td><%= book.body %></td>
-						  </tr>
-						<% end %>
-				</tbody>
-			</table>
-
-		</div>
-	</div>
+  <table class="table no-vertical-lines">
+    <thead class="table-light">
+      <tr>
+        <th style="width: 25%;"></th>       
+        <th style="width: 37.5%;">Title</th>  
+        <th style="width: 37.5%;">Opinion</th>    
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <td>
+            <%= link_to user_path(book.user) do %>
+              <%= image_tag book.user.get_profile_image(100, 100) %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to book.title, book_path(book), class: "text-decoration-none" %>
+          </td>
+          <td>
+            <%= book.body %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

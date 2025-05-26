@@ -1,65 +1,81 @@
-<div class='container px-5 px-sm-0'>
-	<div class="row">
-	  <div class="col-md-3">
+<div class="container px-5 px-sm-0">
+
+  <% if @book && @book.errors.any? %>
+    <div style="color: black; margin-bottom: 20px;">
+      <h4><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h4>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <!-- サイドバー -->
+    <div class="col-md-3">
       <h2 id="user-info">User info</h2>
-	      <%= image_tag @user.get_profile_image(100,100) %>
-	    <table class='table'>
-	      <tr>
-	        <th>name</th>
-	        <td><%= @user.name %></td>
-	      </tr>
-	      <tr>
-	        <th>introduction</th>
-	        <td><%= @user.introduction %></td> 
-	      </tr>
-	    </table>
-
-			<a href="<%= edit_user_path(current_user) %>"
-			style="display: flex; justify-content: center; align-items: center; 
-				width: 280px; height: 30px; border: 1px solid #ccc;; 
-				border-radius: 8px; text-decoration: none;">
-			<svg class="bi" width="20" height="20" style="fill: gray;">
-				<use xlink:href="#box-seam" />
-			</svg>
-				<i class="bi bi-person-fill-gear" style="font-size: 20px; color: gray; margin-auto"></i> 
-		</a>
-
-	    <h2 class="mt-4">New book</h2>
-			<%= form_with(model: @book, local: true) do |f| %>
-				<div class="form-group">
-				  <%= f.label :title %>
-					<%= f.text_field :title, class: "form-control" %>
-				</div>
-
-				<div class="form-group">
-				  <%= f.label :body, "Opinion" %>
-					<%= f.text_area :body, class: "form-control" %>
-				</div>
-				<div class="form-group">
-           <%= f.submit "Create Book", class: "btn btn-success" %>
-        </div>
-			<% end %>
-		</div>
-
-		<div class="col-md-8 offset-md-1">
-		  <h2>Books</h2>
-			<table class="table">
-			<thead>
-      <tr>
-        <th></th>
-        <th>Title</th>
-        <th>Opinion</th>
-      </tr>
-    </thead>
-		<tbody>
-      <% @user.books.each do |book| %>
+      <%= image_tag (@user || current_user).get_profile_image(100, 100) %>
+      <table class="table">
         <tr>
-          <td><%= image_tag book.user.get_profile_image(100, 100) %></td>
-          <td><%= link_to book.title, book_path(book) %>
-          <td><%= book.body %></td>
+          <th>name</th>
+          <td><%= @user.name %></td>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <tr>
+          <th>introduction</th>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </table>
+
+        <%= link_to edit_user_path(@user),
+                    style: "display: flex; justify-content: center; align-items: center; width: 280px; height: 30px; border: 1px solid #ccc; border-radius: 8px; text-decoration: none;" do %>
+          <svg class="bi" width="20" height="20" style="fill: gray; margin-right: 8px;">
+            <use xlink:href="#box-seam" />
+          </svg>
+          <i class="fa-solid fa-user-gear" style="font-size: 20px; color: gray;"></i> 
+        <% end %>
+
+        <h2 class="mt-4">New book</h2>
+        <%= form_with(model: @book, local: true) do |f| %>
+          <div class="form-group">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :body, "Opinion" %>
+            <%= f.text_area :body, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Create Book", class: "btn btn-success" %>
+          </div>
+        <% end %>
+    </div>
+
+    <!-- 本一覧表示 -->
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @books.each do |book| %>
+            <tr>
+              <td>
+                <%= link_to user_path(book.user) do %>
+                  <%= image_tag book.user.get_profile_image(100, 100) %>
+                <% end %>
+              </td>
+              <td><%= link_to book.title, book_path(book) %></td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-			

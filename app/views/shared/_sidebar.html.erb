@@ -2,43 +2,41 @@
 	<div class="row">
 	  <div class="col-md-3">
       <h2 id="user-info">User info</h2>
-	      <%= image_tag current_user.get_profile_image(100,100) %>
+	      <%= image_tag (@user || current_user).get_profile_image(100,100) %>
 	    <table class='table'>
 	      <tr>
 	        <th>name</th>
-	        <td><%= current_user.name %></td>
+	        <td><%= @user.name %></td>
 	      </tr>
 	      <tr>
 	        <th>introduction</th>
-	        <td><%= current_user.introduction %></td> 
+	        <td><%= @user.introduction %></td> 
 	      </tr>
 	    </table>
 
-			<a href="<%= edit_user_path(current_user) %>"
-        style="display: flex; justify-content: center; align-items: center; 
-          width: 280px; height: 30px; border: 1px solid #ccc;; 
-          border-radius: 8px; text-decoration: none;">
-        <svg class="bi" width="20" height="20" style="fill: gray;">
+			<%= link_to edit_user_path(@user),
+			    style: "display: flex; justify-content: center; align-items: center; width: 280px; height: 30px; border: 1px solid #ccc; border-radius: 8px; text-decoration: none;" do %>
+          <svg class="bi" width="20" height="20" style="fill: gray; margin-right: 8px;">
           <use xlink:href="#box-seam" />
-        </svg>
-          <i class="bi bi-person-fill-gear" style="font-size: 20px; color: gray; margin-auto"></i> 
-      </a>
+          </svg>
+          <i class="fa-solid fa-user-gear" style="font-size: 20px; color: gray;"></i> 
+      <% end %>
 
 	    <h2 class="mt-4">New book</h2>
-			<%= form_with(model: @book, local: true) do |f| %>
-				<div class="form-group">
-				  <%= f.label :title %>
-					<%= f.text_field :title, class: "form-control" %>
-				</div>
+        <%= form_with(model: Book.new, local: true) do |f| %>
+				  <div class="form-group">
+				    <%= f.label :title %>
+					  <%= f.text_field :title, class: "form-control" %>
+				  </div>
 
-				<div class="form-group">
-				  <%= f.label :body, "Opinion" %>
-					<%= f.text_area :body, class: "form-control" %>
-				</div>
-				<div class="form-group">
-           <%= f.submit "Create Book", class: "btn btn-success" %>
-        </div>
+			  	<div class="form-group">
+				    <%= f.label :body, "Opinion" %>
+				  	<%= f.text_area :body, class: "form-control" %>
+				  </div>
+			    <div class="form-group">
+            <%= f.submit "Create Book", class: "btn btn-success" %>
+          </div>
 			<% end %>
-		</div>
+	</div>
 
 		

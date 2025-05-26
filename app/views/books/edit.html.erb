@@ -1,17 +1,26 @@
-<h1 style="text-align: center;">Editing Book</h1>
+<div class='container'>
+  <div class='row'>
+  <div style="display: flex; justify-content: center;">
+    <div style="width: 500px; margin: 0 auto;">
 
-<div style="display: flex; justify-content: center;">
-  <div style="width: 500px; margin: 0 auto;">
-     <%= form_with(model: @book, local: true, html: { multipart: true }) do |f| %>
+      <h1 style="width: 100%;">Editing Book</h1>
 
-       <div class="mb-3" style="text-align: left;">
-        <%= f.label :title, "Title" %><br>
-        <%= f.text_field :tilte, class: "form-control" %>
+      <% if @book.errors.any? %>
+  <h3><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</strong></h3>
+  <% @book.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
+
+      <%= form_with(model: @book, local: true, html: { multipart: true }) do |f| %>
+        <div class="mb-3" style="text-align: left;">
+          <%= f.label :title, "Title" %><br>
+          <%= f.text_field :title, class: "form-control" %>
       </div>
 
       <div  class="mb-3" style="text-align: left;">
         <%= f.label :body, "Opinion" %><br>
-        <%= f.text_area :body, rows: 5, class: "form-control" %>
+        <%= f.text_area :body, rows: 3, class: "form-control" %>
       </div>
 
       <div class="mb-3" style="text-align: left;">

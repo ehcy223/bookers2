@@ -21,7 +21,7 @@
         <svg class="bi" width="20" height="20" style="fill: gray;">
           <use xlink:href="#box-seam" />
         </svg>
-          <i class="bi bi-person-fill-gear" style="font-size: 20px; color: gray; margin-auto"></i> 
+          <i class="fa-solid fa-user-gear" style="font-size: 20px; color: gray; margin-auto"></i> 
       </a>
 
       <h2 class="mt-4">New book</h2>
@@ -53,7 +53,7 @@
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= image_tag user.get_profile_image(100, 100) %></td>
+              <td><%= link_to image_tag(user.get_profile_image(100, 100)), user_path(user) %></td>
               <td><%= user.name %></td>
               <td><%= link_to 'Show', user_path(user) %></td>
             </tr>

@@ -22,6 +22,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:name] 
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates :email, presence: true, on: :create #登録時のみemail必須
+  validates :name, presence: true,
+             length: { minimum: 2, maximum: 20, message: "is too short (minimum is 2 characters)" },
+             uniqueness: { case_sensitive: false }
+
+  validates :introduction, length: { maximum: 50 }
+
+  validates :email, presence: true, on: :create
 end

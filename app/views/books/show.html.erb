@@ -11,9 +11,9 @@
         </td>
          <td><strong></strong> <%= @book.title %></td>
          <td><strong></strong> <%= @book.body %></td>
-         <% if current_user == @book.user %>
-            <td><%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-success' %></td>
-            <td><%= link_to 'Delete', book_path(@book), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %></td>
+          <% if current_user == @book.user %>
+              <td><%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-success' %></td>
+              <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td>
           <% end %>
         </tr>
     </tbody>
